@@ -9,10 +9,12 @@
  * Time: 4:01 PM
  * Project: react-components
  */
+import Hebcal from 'hebcal';
+
 
 it('should convert to hebrew date correct', () => {
    const gregorian = new Date('2019-02-21');
-   const result = '5779-Adar I-16';
+   const result = new Hebcal.HDate(gregorian);
 
    expect(gregorian).toEqual(false);
 });
