@@ -106,12 +106,20 @@ class HebrewDateSelector extends React.Component {
     yearsSelector = () => {
         const years = [];
         const currentYear = this.state.hebrewDate.year;
-        console.log(currentYear);
         const endYear = currentYear - yearsOffset;
         for (let i = endYear; i <= currentYear; i++){
             years.push(i);
         }
         return years.reverse();
+    }
+
+    daysSelector = () => {
+        const days = [];
+        const currentMonthDays = this.state.hebrewDate.daysInMonth();
+        for(let i = 1; i <= currentMonthDays; i++){
+            days.push(i);
+        }
+        return days;
     }
 
     getHebrewMonth = () => {
@@ -121,14 +129,15 @@ class HebrewDateSelector extends React.Component {
 
     handleHebrewChange = event => {
         let date = this.state.hebrewDate;
-        switch (event.target.id) {
+        switch (event.target.name) {
             case 'hebrew-day':
-                if (event.target.value > 0 && event.target.value < 32) {
-                    date.day = event.target.value;
-                }
+                date.day = event.target.value;
+                break;
+            case 'hebrew-month':
+                console.log(event.target.value);
+                date.month = event.target.value;
                 break;
             case 'hebrew-year':
-                console.log(date.year);
                 date.year = event.target.value;
                 break;
         }
@@ -186,16 +195,20 @@ class HebrewDateSelector extends React.Component {
                         <h3>Hebrew</h3>
                     </Grid>
                     <Grid item xs={4}>
-                        {/*Should be done as dropdown*/}
                         <FormControl className={classes.formControl}>
-                            <TextField
-                                id="hebrew-day"
-                                label="Day"
-                                className={classes.textField}
+                            <InputLabel htmlFor="hebrew-day">Day</InputLabel>
+                            <Select
                                 value={this.getHebrewDay()}
+                                autoWidth={true}
                                 onChange={this.handleHebrewChange}
-                                margin="normal"
-                            />
+                                input={<Input name="day" id="hebrew-day"/>}
+                                name="hebrew-day"
+                            >
+                                <MenuItem value="">
+                                    <em>Day</em>
+                                </MenuItem>
+                                {this.daysSelector().map((day) => <MenuItem key={day} value={day}><em>{day}</em></MenuItem>)}
+                            </Select>
                         </FormControl>
                         <FormControl className={classes.formControl}>
                             <InputLabel htmlFor="hebrew-month">Month</InputLabel>
@@ -204,6 +217,7 @@ class HebrewDateSelector extends React.Component {
                                 autoWidth={true}
                                 onChange={this.handleHebrewChange}
                                 input={<Input name="year" id="hebrew-month"/>}
+                                name="hebrew-month"
                             >
                                 <MenuItem value="">
                                     <em>Month</em>
@@ -218,6 +232,7 @@ class HebrewDateSelector extends React.Component {
                                 autoWidth={true}
                                 onChange={this.handleHebrewChange}
                                 input={<Input name="year" id="hebrew-year"/>}
+                                name="hebrew-year"
                             >
                                 <MenuItem value="">
                                     <em>Year</em>
