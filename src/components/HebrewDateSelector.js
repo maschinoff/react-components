@@ -43,7 +43,9 @@ const months = [
     'Adar',
     'Adar 1',
     'Adar 2'
-]
+];
+
+const yearsOffset = 70;
 
 const styles = theme => ({
     grid: {
@@ -100,6 +102,17 @@ class HebrewDateSelector extends React.Component {
         const hebrewYear = this.state.hebrewDate.year;
         return hebrewYear;
     };
+
+    yearsSelector = () => {
+        const years = [];
+        const currentYear = this.state.hebrewDate.year;
+        console.log(currentYear);
+        const endYear = currentYear - yearsOffset;
+        for (let i = endYear; i <= currentYear; i++){
+            years.push(i);
+        }
+        return years.reverse();
+    }
 
     getHebrewMonth = () => {
         const hebrewMonth = this.state.hebrewDate.getMonthName();
@@ -198,16 +211,19 @@ class HebrewDateSelector extends React.Component {
                                 {months.map((month) => <MenuItem key={month} value={month}><em>{month}</em></MenuItem>)}
                             </Select>
                         </FormControl>
-                        {/*Should be done as dropdown today - 70*/}
                         <FormControl className={classes.formControl}>
-                            <TextField
-                                id="hebrew-year"
-                                label="Year"
-                                className={classes.textField}
+                            <InputLabel htmlFor="hebrew-year">Year</InputLabel>
+                            <Select
                                 value={this.getHebrewYear()}
+                                autoWidth={true}
                                 onChange={this.handleHebrewChange}
-                                margin="normal"
-                            />
+                                input={<Input name="year" id="hebrew-year"/>}
+                            >
+                                <MenuItem value="">
+                                    <em>Year</em>
+                                </MenuItem>
+                                {this.yearsSelector().map((year) => <MenuItem key={year} value={year}><em>{year}</em></MenuItem>)}
+                            </Select>
                         </FormControl>
 
                     </Grid>
