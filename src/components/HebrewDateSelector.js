@@ -173,7 +173,7 @@ class HebrewDateSelector extends React.Component {
                         <h3>Hebrew</h3>
                     </Grid>
                     <Grid item xs={4}>
-
+                        {/*Should be done as dropdown*/}
                         <FormControl className={classes.formControl}>
                             <TextField
                                 id="hebrew-day"
@@ -198,6 +198,7 @@ class HebrewDateSelector extends React.Component {
                                 {months.map((month) => <MenuItem key={month} value={month}><em>{month}</em></MenuItem>)}
                             </Select>
                         </FormControl>
+                        {/*Should be done as dropdown today - 70*/}
                         <FormControl className={classes.formControl}>
                             <TextField
                                 id="hebrew-year"
