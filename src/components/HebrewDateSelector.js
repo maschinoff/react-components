@@ -123,7 +123,7 @@ class HebrewDateSelector extends React.Component {
     }
 
     getHebrewMonth = () => {
-        const hebrewMonth = this.state.hebrewDate.getMonthName();
+        const hebrewMonth = this.state.hebrewDate.getMonth();
         return hebrewMonth;
     };
 
@@ -134,7 +134,6 @@ class HebrewDateSelector extends React.Component {
                 date.day = event.target.value;
                 break;
             case 'hebrew-month':
-                console.log(event.target.value);
                 date.month = event.target.value;
                 break;
             case 'hebrew-year':
@@ -222,7 +221,7 @@ class HebrewDateSelector extends React.Component {
                                 <MenuItem value="">
                                     <em>Month</em>
                                 </MenuItem>
-                                {months.map((month) => <MenuItem key={month} value={month}><em>{month}</em></MenuItem>)}
+                                {months.map((month, index) => <MenuItem key={month} value={index+1}><em>{month}</em></MenuItem>)}
                             </Select>
                         </FormControl>
                         <FormControl className={classes.formControl}>
