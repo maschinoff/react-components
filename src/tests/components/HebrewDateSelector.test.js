@@ -11,10 +11,14 @@
  */
 import Hebcal from 'hebcal';
 
-
 it('should convert to hebrew date correct', () => {
-   const gregorian = new Date('2019-02-21');
-   const result = new Hebcal.HDate(gregorian);
+    expect(true).toEqual(false);
+});
 
-   expect(gregorian).toEqual(false);
+it('should convert to gregorian date correct', () => {
+    expect(true).toEqual(false);
+});
+
+it('should handle date change', () => {
+    expect(true).toEqual(false);
 });
